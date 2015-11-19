@@ -1,4 +1,4 @@
-package com.lukeigel.game.main;
+package com.lukeigel.game.gamestate;
 
 import java.awt.Graphics;
 

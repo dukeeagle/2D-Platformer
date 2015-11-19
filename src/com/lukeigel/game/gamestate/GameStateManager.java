@@ -1,4 +1,4 @@
-package com.lukeigel.game.main;
+package com.lukeigel.game.gamestate;
 
 import java.awt.Graphics;
 
@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class GameStateManager {
 	
-	private Stack<GameState> states;
+	public Stack<GameState> states;
 	
 	public GameStateManager(){
 		states = new Stack<GameState>();

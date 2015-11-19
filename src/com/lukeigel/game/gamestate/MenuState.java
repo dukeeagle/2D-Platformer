@@ -1,9 +1,11 @@
-package com.lukeigel.game.main;
+package com.lukeigel.game.gamestate;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+
+import com.lukeigel.game.main.GamePanel;
 
 public class MenuState extends GameState {
 
@@ -50,6 +52,17 @@ public class MenuState extends GameState {
 			currentSelection--;
 			if(currentSelection < 0){
 				currentSelection = options.length -1;
+			}
+		}
+		
+		if(k == KeyEvent.VK_ENTER){
+			if(currentSelection == 0){
+				//play
+				gsm.states.push(new Level1State(gsm));
+			} else if(currentSelection == 1){
+				//help
+			} else if(currentSelection == 2){
+				System.exit(0);
 			}
 		}
 		

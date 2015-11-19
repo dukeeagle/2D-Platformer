@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
+import com.lukeigel.game.gamestate.GameStateManager;
+
 
 public class GamePanel extends JPanel implements Runnable, KeyListener{
 	private static final long serialVersionUID = 1L;
