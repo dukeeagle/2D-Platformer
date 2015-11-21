@@ -2,10 +2,15 @@ package com.lukeigel.game.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 //import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
+import com.lukeigel.game.gamestate.GameState;
 import com.lukeigel.game.main.GamePanel;
+import com.lukeigel.game.objects.Block;
+
+import come.lukeigel.game.physics.Collision;
 
 public class Player {
 	
@@ -15,6 +20,9 @@ public class Player {
 	//bounds
 	private double x, y;
 	public int width, height;
+	
+	//move speed
+	private double moveSpeed = 2.5;
 	
 	//jump speed
 	private double jumpSpeed = 5;
@@ -32,15 +40,52 @@ public class Player {
 		
 	}
 	
-	public void tick(){
+	public void tick(Block[] b){
+		
+		for(int i = 0; i < b.length; i++){
+			
+			int iX = (int)x;
+			int iY = (int)y;
+			
+			//right
+			if(Collision.playerBlock(new Point(iX + width + (int)GameState.xOffset, iY + (int)GameState.yOffset), b[i])
+					|| Collision.playerBlock(new Point(iX + width + (int)GameState.xOffset, iY + height + (int)GameState.yOffset), b[i])){
+				right = false;
+			}
+			
+			//left
+			if(Collision.playerBlock(new Point(iX + (int)GameState.xOffset, iY + (int)GameState.yOffset), b[i])
+					|| Collision.playerBlock(new Point(iX + (int)GameState.xOffset, iY + height + (int)GameState.yOffset), b[i])){
+				left = false;
+			}
+			
+			//top
+			if(Collision.playerBlock(new Point(iX + (int)GameState.xOffset, iY + (int)GameState.yOffset), b[i])
+					|| Collision.playerBlock(new Point(iX + width + (int)GameState.xOffset, iY + (int)GameState.yOffset), b[i])){
+				jumping = false;
+				falling = true;
+			}
+			
+			//bottom
+			if(Collision.playerBlock(new Point(iX + (int)GameState.xOffset, iY + height + (int)GameState.yOffset), b[i])
+					|| Collision.playerBlock(new Point(iX + width + (int)GameState.xOffset, iY + height + (int)GameState.yOffset), b[i])){
+				falling = false;
+				break;
+			} else {
+				falling = true;
+			}
+			
+		}
+		
+		
 		if(right){
-			x++;
+			GameState.xOffset += moveSpeed;
 		}
 		if(left){
-			x--;
+			GameState.xOffset -= moveSpeed;
 		}
 		if(jumping){
-			y -= currentJumpSpeed;
+			GameState.yOffset -= currentJumpSpeed;
 			
 			currentJumpSpeed -= 0.1;
 			
@@ -52,11 +97,14 @@ public class Player {
 			}
 		}
 		if(falling){
-			y += currentFallSpeed;
+			GameState.yOffset += currentFallSpeed;
 			
 			if(currentFallSpeed < maxFallSpeed){
 				currentFallSpeed += 0.1;
 			}
+		}
+		if(!falling){
+			currentFallSpeed = 0.1;
 		}
 	}
 	

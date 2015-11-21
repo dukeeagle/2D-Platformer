@@ -5,10 +5,14 @@ import java.awt.Graphics;
 public abstract class GameState {
 	
 	protected GameStateManager gsm;
+	public static double xOffset, yOffset;
 	
 	public GameState(GameStateManager gsm){
 		this.gsm = gsm;
 		init();
+		
+		xOffset = 0;
+		yOffset = 0;
 	}
 	//all of this methods will be required in the game state, but not necessarily used
 	public abstract void init();
