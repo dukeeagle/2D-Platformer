@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
+import com.luke.igel.resources.Images;
 import com.lukeigel.game.gamestate.GameStateManager;
 
 
@@ -30,6 +31,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		
 		addKeyListener(this);
 		setFocusable(true);
+		
+		new Images();
 		
 		start();
 	}

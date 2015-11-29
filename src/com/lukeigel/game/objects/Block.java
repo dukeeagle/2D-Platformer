@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Rectangle;
 
+import com.luke.igel.resources.Images;
 import com.lukeigel.game.gamestate.GameState;
 
 public class Block extends Rectangle {
@@ -24,7 +25,7 @@ public class Block extends Rectangle {
 	public void draw(Graphics g){
 		g.setColor(Color.BLACK);
 		if(id != 0){
-			g.fillRect(x - (int)GameState.xOffset, y - (int)GameState.yOffset, width, height);
+			g.drawImage(Images.blocks[id - 1],x - (int)GameState.xOffset, y - (int)GameState.yOffset, width, height, null);
 		}
 	}
 	
