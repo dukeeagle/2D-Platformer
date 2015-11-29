@@ -50,6 +50,8 @@ public class Player {
 			int iX = (int)x;
 			int iY = (int)y;
 			
+			if(b[i][j].getID() != 0){
+				
 			//right
 			if(Collision.playerBlock(new Point(iX + width + (int)GameState.xOffset, iY + (int)GameState.yOffset + 2), b[i][j])
 					|| Collision.playerBlock(new Point(iX + width + (int)GameState.xOffset, iY + height + (int)GameState.yOffset - 1), b[i][j])){
@@ -58,7 +60,7 @@ public class Player {
 			
 			//left
 			if(Collision.playerBlock(new Point(iX + (int)GameState.xOffset - 1, iY + (int)GameState.yOffset + 2), b[i][j])
-					|| Collision.playerBlock(new Point(iX + (int)GameState.xOffset - 1, iY + height + (int)GameState.yOffset - 1), b[i][j])){
+					|| Collision.playerBlock(new Point(iX + (int)GameState.xOffset - 2, iY + height + (int)GameState.yOffset - 1), b[i][j])){
 				left = false;
 			}
 			
@@ -71,17 +73,18 @@ public class Player {
 			
 			//bottom
 			if(Collision.playerBlock(new Point(iX + (int)GameState.xOffset + 2, iY + height + (int)GameState.yOffset + 1), b[i][j])
-					|| Collision.playerBlock(new Point(iX + width + (int)GameState.xOffset - 1, iY + height + (int)GameState.yOffset + 1), b[i][j])){
+					|| Collision.playerBlock(new Point(iX + width + (int)GameState.xOffset - 2, iY + height + (int)GameState.yOffset + 1), b[i][j])){
 				y = b[i][j].getY() - height - GameState.yOffset;
 				falling = false;
 				topCollision = true;
 			} else {
 				if(!topCollision && !jumping){
 					falling = true;
+					}
 				}
 			}
-			}
 		}
+	}
 		
 		topCollision = false;
 		
